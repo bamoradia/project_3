@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/project_3_GA');
 

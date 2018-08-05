@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import Job from './job';
+const mongoose = require('mongoose');
+const Job = require('./job');
 
 
 const userSchema = mongoose.Schema({
