@@ -13,6 +13,10 @@ const port = 5000;
 require('./db/db')
 
 
+//add controllers
+const userController = require('./controllers/userController');
+const jobController = require('./controllers/jobController');
+
 
 //use MiddleWare
 app.use(session({
@@ -21,6 +25,12 @@ app.use(session({
 	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
 }));
 app.use(bodyParser.urlencoded({extended: false}));
+
+
+//use controllers
+app.use('/api/v1/users', userController);
+app.use('/api/v1/jobs', jobController);
+
 
 
 
