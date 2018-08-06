@@ -159,7 +159,9 @@ router.delete('/:id', async (req, res) => {
 
 // Logging out // 
 router.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
+
+	//destroy user's session data
+  	req.session.destroy((err) => {
     if(err) {
       res.json({
       	status: 404,

@@ -3,6 +3,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cors = require('cors');
 
 
 //set the port
@@ -24,14 +25,21 @@ app.use(session({
 	resave: false, //only save when the session object has been modified
 	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
 }));
+//setup body parser to read request body information
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+//setup cors to allow requests from other servers
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 
 
 //use controllers
 app.use('/api/v1/users', userController);
 app.use('/api/v1/jobs', jobController);
-
-
 
 
 

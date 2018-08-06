@@ -11,6 +11,15 @@ router.get('/', async (req, res) => {
 	try{	
 		//find all jobs
 		const allJobs = await Job.find();
+		//get the current time in Unix Time Stamp
+		const now = Date.now();
+
+		//only return jobs who have been posted within the last 48 hours
+		const openJobs = allJobs.map(job => {
+			if((now - job.datePosted) > 172800) {
+				return job
+			}
+		})
 
 		res.json({
 			status: 200,
@@ -133,11 +142,6 @@ router.put('/:id', async (req, res) => {
 		})
 	}
 })
-
-
-
-
-
 
 
 
