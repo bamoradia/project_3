@@ -1,9 +1,8 @@
-const express = require('express');
-const app = express();
-
+const express 	 = require('express');
+const app		 = express();
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const cors = require('cors');
+const session 	 = require('express-session');
+const cors 		 = require('cors');
 
 
 //set the port
@@ -25,9 +24,11 @@ app.use(session({
 	resave: false, //only save when the session object has been modified
 	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
 }));
+
 //setup body parser to read request body information
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 //setup cors to allow requests from other servers
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -47,3 +48,8 @@ app.use('/api/v1/jobs', jobController);
 app.listen(port, () => {
 	console.log(`Server is listening on port: ${port}`)
 })
+
+
+
+
+

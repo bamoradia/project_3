@@ -6,7 +6,7 @@ const Job = require('../models/job');
 
 
 
-//get all jobs//
+// get all jobs //
 router.get('/', async (req, res) => {
 	try{	
 		//find all jobs
@@ -16,10 +16,11 @@ router.get('/', async (req, res) => {
 
 		//only return jobs who have been posted within the last 48 hours
 		const openJobs = allJobs.map(job => {
-			if((now - job.datePosted) > 172800) {
+			if((now - job.datePosted) < 172800) {
 				return job
 			}
 		})
+
 
 		res.json({
 			status: 200,
@@ -27,7 +28,7 @@ router.get('/', async (req, res) => {
 		})
 
 	} catch (err) {
-
+		console.log(err, 'error with get route')
 		res.json({
 			status: 400, 
 			data: 'Error with Job Get Route'
@@ -35,7 +36,7 @@ router.get('/', async (req, res) => {
 	}
 })
 
-//Create new job//
+// Create new job //
 router.post('/', async (req, res) => {
 	try{
 		if(req.session.loggedIn) {
@@ -68,7 +69,7 @@ router.post('/', async (req, res) => {
 	}
 })
 
-//Delete Job//
+// Delete Job //
 router.delete('/:id', async (req, res) => {
 	try{
 		const foundJob = await Job.findById(req.params.id)
@@ -101,7 +102,7 @@ router.delete('/:id', async (req, res) => {
 	}
 })
 
-//Edit Job//
+// Edit Job //
 router.put('/:id', async (req, res) => {
 	try{
 		//find the job 

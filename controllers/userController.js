@@ -8,7 +8,7 @@ const Job = require('../models/job');
 
 const bcrypt = require('bcrypt');
 
-//User Login //
+// User Login //
 router.post('/login', async (req, res) => {
 	try{
 
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 })
 
 
-//Create New User //
+// Create New User //
 router.post('/register', async (req, res) => {
 	try{
 
@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
 })
 
 
-//Edit User //
+// Edit User //
 router.put('/:id', async (req, res) => {
 	try{
 		//check to ensure user to be updated matches user credentials
