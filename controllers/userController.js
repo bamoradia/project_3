@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 
 const User = require('../models/user');
 const Job = require('../models/job');
@@ -40,29 +40,31 @@ router.post('/login', async (req, res) => {
 
 // Create New User //
 router.post('/register', async (req, res) => {
+	console.log(req.body)
 	try{
 
 		const password = req.body.password;
-	    const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-	    // Create an object to enter into the User model. 
-	    const userDbEntry = {};
-	    userDbEntry.username = req.body.username;
-	    userDbEntry.password = passwordHash;
+    // Create an object to enter into the User model.
+    const userDbEntry = {};
+    userDbEntry.username = req.body.username;
+    userDbEntry.password = passwordHash;
 
-	    //create new user in database
-	    const createdUser = await User.create(userDbEntry);
-	    req.session.userId = createdUser.id;
-    	req.session.username = createdUser.username; 
-    	req.session.logged = true;
+    //create new user in database
+    const createdUser = await User.create(userDbEntry);
+    req.session.userId = createdUser.id;
+  	req.session.username = createdUser.username;
+  	req.session.logged = true;
 
-    	//send back user information
-    	res.json({
-    		status: 200,
-    		data: createdUser
-    	})
+  	//send back user information
+  	res.json({
+  		status: 200,
+  		data: createdUser
+  	})
 
 	} catch (err) {
+		console.log(err, "this is the error from trying to register");
 		res.json({
 			status: 404,
 			data: err
@@ -136,7 +138,7 @@ router.delete('/:id', async (req, res) => {
 				status: 200,
 				data: 'Deleted User'
 			})
-			
+
 
 	   	//send back error if user is not authorized
 		} else {
@@ -157,7 +159,7 @@ router.delete('/:id', async (req, res) => {
 
 
 
-// Logging out // 
+// Logging out //
 router.get('/logout', (req, res) => {
 
 	//destroy user's session data

@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 
 const User = require('../models/user');
 const Job = require('../models/job');
@@ -8,7 +8,7 @@ const Job = require('../models/job');
 
 // get all jobs //
 router.get('/', async (req, res) => {
-	try{	
+	try{
 		//find all jobs
 		const allJobs = await Job.find();
 		//get the current time in Unix Time Stamp
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 	} catch (err) {
 		console.log(err, 'error with get route')
 		res.json({
-			status: 400, 
+			status: 400,
 			data: 'Error with Job Get Route'
 		})
 	}
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 		if(req.session.loggedIn) {
 			//make the ownerID the same as the userID
 			req.body.userID = req.session.userID;
-			//find the User 
+			//find the User
 			const foundUser = await User.findById(req.session.userID);
 			//add the job to the user's job array
 			foundUser.jobs.push(req.body);
@@ -57,13 +57,13 @@ router.post('/', async (req, res) => {
 
 		} else {
 			res.json({
-				status: 403, 
+				status: 403,
 				data: 'Unauthorized Action'
 			})
 		}
 	} catch (err) {
 		res.json({
-			status: 400, 
+			status: 400,
 			data: 'Error with create job route'
 		})
 	}
@@ -90,13 +90,13 @@ router.delete('/:id', async (req, res) => {
 
 		} else {
 			res.json({
-				status: 403, 
+				status: 403,
 				data: 'Unauthorized Action'
 			})
 		}
 	} catch (err) {
 		res.json({
-			status: 400, 
+			status: 400,
 			data: 'Error with create job route'
 		})
 	}
@@ -105,9 +105,9 @@ router.delete('/:id', async (req, res) => {
 // Edit Job //
 router.put('/:id', async (req, res) => {
 	try{
-		//find the job 
+		//find the job
 		const foundJob = await Job.findById(req.params.id)
-		//check if user owns the job 
+		//check if user owns the job
 		if(req.session.userID === foundJob.ownerID) {
 
 			//add user ID to updated info
@@ -132,13 +132,13 @@ router.put('/:id', async (req, res) => {
 
 		} else {
 			res.json({
-				status: 403, 
+				status: 403,
 				data: 'Unauthorized Action'
 			})
 		}
 	} catch (err) {
 		res.json({
-			status: 400, 
+			status: 400,
 			data: 'Error with create job route'
 		})
 	}
