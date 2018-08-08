@@ -53,7 +53,7 @@ router.post('/register', async (req, res) => {
 	    const createdUser = await User.create(userDbEntry);
 	    req.session.userID = createdUser.id;
 	  	req.session.username = createdUser.username;
-	  	req.session.logged = true;
+	  	req.session.loggedIn = true;
 
 	  	//send back user information
 	  	res.json({
