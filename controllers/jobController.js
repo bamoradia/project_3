@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
 		res.json({
 			status: 200,
-			data: allJobs
+			data: openJobs
 		})
 
 	} catch (err) {
