@@ -40,28 +40,26 @@ router.post('/login', async (req, res) => {
 
 // Create New User //
 router.post('/register', async (req, res) => {
-	console.log(req.body)
 	try{
-
 		const password = req.body.password;
-    const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+	    const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-    // Create an object to enter into the User model.
-    const userDbEntry = {};
-    userDbEntry.username = req.body.username;
-    userDbEntry.password = passwordHash;
+	    // Create an object to enter into the User model.
+	    const userDbEntry = {};
+	    userDbEntry.username = req.body.username;
+	    userDbEntry.password = passwordHash;
 
-    //create new user in database
-    const createdUser = await User.create(userDbEntry);
-    req.session.userId = createdUser.id;
-  	req.session.username = createdUser.username;
-  	req.session.logged = true;
+	    //create new user in database
+	    const createdUser = await User.create(userDbEntry);
+	    req.session.userId = createdUser.id;
+	  	req.session.username = createdUser.username;
+	  	req.session.logged = true;
 
-  	//send back user information
-  	res.json({
-  		status: 200,
-  		data: createdUser
-  	})
+	  	//send back user information
+	  	res.json({
+	  		status: 200,
+	  		data: createdUser
+	  	})
 
 	} catch (err) {
 		console.log(err, "this is the error from trying to register");
@@ -77,6 +75,7 @@ router.post('/register', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try{
 		//check to ensure user to be updated matches user credentials
+		console.log(req.session, req.params.id, 'this is req.session and params')
 		if(req.session.userID === req.params.id) {
 			//find user using id hash
 			const foundUser = await User.findOne({username: req.body.username});

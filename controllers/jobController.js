@@ -16,15 +16,10 @@ router.get('/', async (req, res) => {
 
 		//only return jobs who have been posted within the last 48 hours
 		const openJobs = allJobs.filter(job => {
-			console.log(now - job.datePosted, 'this is the time difference')
-
 			if(Math.abs(now - job.datePosted) < 172800000) {
 				return job
 			}
 		})
-
-		console.log(openJobs, 'this is all the jobs to be returned')
-
 
 		res.json({
 			status: 200,
@@ -42,7 +37,6 @@ router.get('/', async (req, res) => {
 
 // Create new job //
 router.post('/', async (req, res) => {
-	// console.log(req.body, req.session, 'this is req.body and req.session in create new job')
 	try{
 		if(req.session.loggedIn) {
 			//make the ownerID the same as the userID
