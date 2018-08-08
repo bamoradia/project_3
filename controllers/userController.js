@@ -75,7 +75,7 @@ router.post('/register', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try{
 		//check to ensure user to be updated matches user credentials
-		console.log(req.session, req.params.id, 'this is req.session and params')
+		// console.log(req.session, req.params.id, 'this is req.session and params')
 		if(req.session.userID === req.params.id) {
 			//find user using id hash
 			const foundUser = await User.findOne({username: req.body.username});
@@ -91,7 +91,7 @@ router.put('/:id', async (req, res) => {
 	   		//update session info
 	   		req.session.username = foundUser.username;
 	   		//send back information
-	   		req.send({
+	   		res.send({
 	   			status: 200,
 	   			data: foundUser
 	   		})
@@ -105,9 +105,10 @@ router.put('/:id', async (req, res) => {
 		}
 
 	} catch (err) {
+		console.log(err, 'error with edit user route')
 		res.json({
 			status: 404,
-			data: err
+			data: 'Error with updating user information'
 		})
 	}
 })
