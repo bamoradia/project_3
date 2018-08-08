@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
 
 	    //create new user in database
 	    const createdUser = await User.create(userDbEntry);
-	    req.session.userId = createdUser.id;
+	    req.session.userID = createdUser.id;
 	  	req.session.username = createdUser.username;
 	  	req.session.logged = true;
 
@@ -125,8 +125,10 @@ router.delete('/:id', async (req, res) => {
 			const jobsIdArray = [];
 			//make an array of all jobs ids
 			for(let i = 0; i < foundUser.jobs.length; i++) {
+				console.log(foundUser.jobs[i].id)
 				jobsIdArray.push(foundUser.jobs[i].id);
 			}
+			console.log(jobsIdArray)
 
 			//delete all jobs associated with user
 			await User.remove({_id: {$in: jobsIdArray}})
