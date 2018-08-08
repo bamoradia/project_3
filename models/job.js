@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-
-const time = Date.now();
-
 const jobSchema = mongoose.Schema({
 	title: {type: String, required: true},
 	category: [{type: String, required: true}],
@@ -10,7 +7,7 @@ const jobSchema = mongoose.Schema({
 	location: [{type: String}],
 	phone: String,
 	body: String,
-	datePosted: {type: Date, default: time},
+	datePosted: {type: Number, default: Date.now()},
 	ownerID: String
 })
 
