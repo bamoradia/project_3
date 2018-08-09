@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
 
 		res.json({
 			status: 200,
-			data: openJobs
+			data: openJobs,
+			loggedIn: req.session.loggedIn
 		})
 
 	} catch (err) {
