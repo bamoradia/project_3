@@ -37,14 +37,17 @@ router.get('/', async (req, res) => {
 
 // Create new job //
 router.post('/', async (req, res) => {
+	console.log(" line 40");
 	try{
 		if(req.session.loggedIn) {
 			//make the ownerID the same as the userID
 			// console.log(req.session.userID, 'this is req.session.userID')
+			console.log(" line 45");
 			req.body.ownerID = req.session.userID;
 			// console.log(req.body, 'this is req.body after adding user ID')
 			//find the User
 			const foundUser = await User.findById(req.session.userID);
+						console.log(" line 45");
 			//add the job to the user's job array
 			foundUser.jobs.push(req.body);
 			await foundUser.save();
@@ -63,6 +66,7 @@ router.post('/', async (req, res) => {
 			})
 		}
 	} catch (err) {
+		console.log(err);
 		res.json({
 			status: 400,
 			data: 'Error with create job route'
