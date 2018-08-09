@@ -134,12 +134,20 @@ router.delete('/:id', async (req, res) => {
 			//delete user
 			const removedUser = await User.findByIdAndRemove(req.params.id);
 
-			res.json({
-				status: 200,
-				data: 'Deleted User'
+			req.session.destroy((err) => {
+				if(err) {
+					res.json({
+						status: 400,
+						data: 'Error with Delete User'
+					})
+				} else {
+					res.json({
+						status: 200,
+						data: 'Deleted User'
+					})
+				}
 			})
-
-
+			
 	   	//send back error if user is not authorized
 		} else {
 			res.json({
