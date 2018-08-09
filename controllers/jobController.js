@@ -45,11 +45,12 @@ router.post('/', async (req, res) => {
 			// console.log(req.body, 'this is req.body after adding user ID')
 			//find the User
 			const foundUser = await User.findById(req.session.userID);
-			//add the job to the user's job array
-			foundUser.jobs.push(req.body);
-			await foundUser.save();
+			
 			//create the new job in the Jobs model
 			const newJob = await Job.create(req.body);
+			//add the job to the user's job array
+			foundUser.jobs.push(newJob);
+			await foundUser.save();
 
 			res.json({
 				status: 200,

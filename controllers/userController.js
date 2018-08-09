@@ -125,13 +125,11 @@ router.delete('/:id', async (req, res) => {
 			const jobsIdArray = [];
 			//make an array of all jobs ids
 			for(let i = 0; i < foundUser.jobs.length; i++) {
-				console.log(foundUser.jobs[i].id)
 				jobsIdArray.push(foundUser.jobs[i].id);
 			}
-			console.log(jobsIdArray)
 
 			//delete all jobs associated with user
-			await User.remove({_id: {$in: jobsIdArray}})
+			await Job.remove({_id: {$in: jobsIdArray}})
 
 			//delete user
 			const removedUser = await User.findByIdAndRemove(req.params.id);
@@ -184,3 +182,4 @@ router.get('/logout', (req, res) => {
 
 
 module.exports = router;
+
