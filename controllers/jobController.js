@@ -24,7 +24,9 @@ router.get('/', async (req, res) => {
 		res.json({
 			status: 200,
 			data: openJobs,
-			loggedIn: req.session.loggedIn
+			loggedIn: req.session.loggedIn, 
+			username: req.session.username,
+			userID: req.session.userID
 		})
 
 	} catch (err) {
