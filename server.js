@@ -22,7 +22,11 @@ const jobController = require('./controllers/jobController');
 app.use(session({
 	secret: '9fajdf9urajdkfaskfjip9jkjkaldjsf2o3aaksdf2342342sdfwfkjafaf',
 	resave: false, //only save when the session object has been modified
-	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
+	saveUninitialized: false, //user for login sessions, we only want to save when we modify the session
+	cookie: {
+		maxAge: 86400000, 
+		secure: false
+	}
 }));
 
 //setup body parser to read request body information
