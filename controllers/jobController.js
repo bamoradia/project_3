@@ -40,6 +40,9 @@ router.get('/', async (req, res) => {
 
 // Create new job //
 router.post('/', async (req, res) => {
+	console.log("")
+	console.log("req.session in router.post / in job controlelr", req.session)
+	console.log("")
 	try{
 		if(req.session.loggedIn) {
 			//make the ownerID the same as the userID

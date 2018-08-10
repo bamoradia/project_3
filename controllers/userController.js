@@ -54,6 +54,10 @@ router.post('/register', async (req, res) => {
 	    req.session.userID = createdUser.id;
 	  	req.session.username = createdUser.username;
 	  	req.session.loggedIn = true;
+	  	console.log("")
+	  	console.log("session in register route:", req.session)
+	  	console.log("")
+
 
 	  	//send back user information
 	  	res.json({
