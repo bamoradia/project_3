@@ -25,7 +25,7 @@ app.use(session({
 	saveUninitialized: false, //user for login sessions, we only want to save when we modify the session
 	cookie: {
 		maxAge: 86400000, 
-		secure: true
+		secure: false
 	}
 }));
 
