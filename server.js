@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 
 //setup cors to allow requests from other servers
 const corsOptions = {
-  origin: 'http://fine-grind.herokuapp.com',
+  origin: 'https://fine-grind.herokuapp.com',
   credentials: true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
