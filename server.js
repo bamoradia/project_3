@@ -6,7 +6,7 @@ const cors 		 = require('cors');
 
 
 //set the port
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 
 //require the database file
